@@ -3,3 +3,14 @@
   color: white;
   padding: 20px;
 }
+
+#command {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  color: white;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid whitesmoke;
+  padding: 5px;
+  background: black;
+  width: 100%;
+}
