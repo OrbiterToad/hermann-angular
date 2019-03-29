@@ -10,10 +10,10 @@ import {Message} from '../model/message';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  private clientId: number;
   client: Client = new Client();
   messages: Message[];
   command: string;
+  private clientId: number;
 
   constructor(private route: ActivatedRoute, private httpService: HttpService) {
     this.route.params.subscribe(params => {
@@ -45,6 +45,13 @@ export class ClientComponent implements OnInit {
     }
   }
 
+  setNickname() {
+    this.httpService.post('http://scorewinner.ch:8085/client/' + this.clientId + '/nickname?nickname=' + this.client.nickname)
+      .subscribe(success => {
+        console.log('Changed Nickname ' + success);
+      });
+  }
+
   private clearMessages() {
     this.httpService.post('http://scorewinner.ch:8085/message/' + this.clientId + '/clear')
       .subscribe(success => {
@@ -52,13 +59,6 @@ export class ClientComponent implements OnInit {
       });
     this.command = '';
     this.fetchMessages();
-  }
-
-  setNickname() {
-    this.httpService.post('http://scorewinner.ch:8085/client/' + this.clientId + '/nickname?nickname=' + this.client.nickname)
-      .subscribe(success => {
-        console.log('Changed Nickname ' + success);
-      });
   }
 
   private sendCommand() {

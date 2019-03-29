@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">Overview</a>
-  <a class="nav-link" routerLink="/login" *ngIf="user.name == null">Login</a>
-  <a class="nav-link" *ngIf="user.name != null">{{user.name}}</a>
+  <a *ngIf="user.name == null" class="nav-link" routerLink="/login">Login</a>
+  <a *ngIf="user.name != null" class="nav-link">{{user.name}}</a>
 </nav>

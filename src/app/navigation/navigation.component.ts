@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../model/User';
+import {User} from '../model/user';
 import {HttpService} from '../service/http.service';
 import {CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
