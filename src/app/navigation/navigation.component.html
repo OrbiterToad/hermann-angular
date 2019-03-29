@@ -1,3 +1,5 @@
-<p>
-  <a routerLink="/">Overview</a>
-</p>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">Overview</a>
+  <a class="nav-link" routerLink="/login" *ngIf="user.name == null">Login</a>
+  <a class="nav-link" *ngIf="user.name != null">{{user.name}}</a>
+</nav>

@@ -1,15 +1,8 @@
 <h1>Client {{client.name}}</h1>
-<p>{{client.nickname}}</p>
-<p>{{client.pcUser}}</p>
-<p>{{client.os}}</p>
-<p>{{client.ip}}</p>
-<p>{{client.clientArch}}</p>
-<p>{{client.lastseen}}</p>
-<p>{{client.refreshtime}}</p>
 
 <div class="console card">
   <form (ngSubmit)="setCommand()" method="post">
-    <input id="command" type="text" name="command" [(ngModel)]="commandModel.command" autocomplete="off" required>
+    <input id="command" type="text" name="command" [(ngModel)]="command" autocomplete="off" required>
   </form>
   <br>
   <span *ngFor="let message of messages" [ngSwitch]="message.type">
@@ -20,4 +13,40 @@
     <pre *ngSwitchCase="'message'" style="color: violet;">{{message.message}}</pre>
     <pre *ngSwitchCase="'response'" style="color: white;">{{message.message}}</pre>
   </span>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        <td>Nickname</td>
+        <td>
+          <form (ngSubmit)="setNickname()">
+            <input class="form-control" type="text" id="nickname" name="nickname" [(ngModel)]="client.nickname"
+                   required>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>PC User</td>
+        <td>{{client.pcUser}}</td>
+      </tr>
+      <tr>
+        <td>OS</td>
+        <td>{{client.os}}</td>
+      </tr>
+      <tr>
+        <td>IP</td>
+        <td>{{client.ip}}</td>
+      </tr>
+      <tr>
+        <td>Client Arch</td>
+        <td>{{client.clientArch}}</td>
+      </tr>
+      <tr>
+        <td>Last Seen</td>
+        <td>{{client.lastseen}}</td>
+      </tr>
+    </table>
+  </div>
 </div>

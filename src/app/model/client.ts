@@ -9,6 +9,4 @@ export class Client {
   clientArch: string;
   command: string;
   lastseen: string;
-  refreshtime: number;
-
 }

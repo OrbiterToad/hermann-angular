@@ -3,7 +3,6 @@ import {Client} from '../model/client';
 import {HttpService} from '../service/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {Message} from '../model/message';
-import {Command} from '../model/command';
 
 @Component({
   selector: 'app-client',
@@ -11,22 +10,21 @@ import {Command} from '../model/command';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
+  private clientId: number;
   client: Client = new Client();
   messages: Message[];
-  commandModel: Command;
-  private clientId: number;
+  command: string;
 
   constructor(private route: ActivatedRoute, private httpService: HttpService) {
     this.route.params.subscribe(params => {
       this.clientId = +params['id'];
     });
 
-    this.commandModel = new Command();
-    this.commandModel.command = '';
+    this.command = '';
   }
 
   ngOnInit() {
-    this.httpService.get<Client>('http://localhost:8085/client/' + this.clientId).subscribe(client => {
+    this.httpService.get<Client>('http://scorewinner.ch:8085/client/' + this.clientId).subscribe(client => {
       this.client = client;
     });
     this.fetchMessages();
@@ -36,7 +34,7 @@ export class ClientComponent implements OnInit {
   }
 
   setCommand() {
-    switch (this.commandModel.command) {
+    switch (this.command) {
       case '':
         break;
       case 'clear':
@@ -48,25 +46,32 @@ export class ClientComponent implements OnInit {
   }
 
   private clearMessages() {
-    this.httpService.post('http://localhost:8085/message/' + this.clientId + '/clear')
+    this.httpService.post('http://scorewinner.ch:8085/message/' + this.clientId + '/clear')
       .subscribe(success => {
         console.log('Clear Messages ' + success);
       });
-    this.commandModel.command = '';
+    this.command = '';
     this.fetchMessages();
   }
 
+  setNickname() {
+    this.httpService.post('http://scorewinner.ch:8085/client/' + this.clientId + '/nickname?nickname=' + this.client.nickname)
+      .subscribe(success => {
+        console.log('Changed Nickname ' + success);
+      });
+  }
+
   private sendCommand() {
-    this.httpService.post('http://localhost:8085/out/' + this.clientId + '?command=' + this.commandModel.command)
+    this.httpService.post('http://scorewinner.ch:8085/out/' + this.clientId + '?command=' + this.command)
       .subscribe(success => {
         console.log('Changed Command ' + success);
       });
-    this.commandModel.command = '';
+    this.command = '';
     this.fetchMessages();
   }
 
   private fetchMessages() {
-    this.httpService.get<Message[]>('http://localhost:8085/message/' + this.clientId).subscribe(messages => {
+    this.httpService.get<Message[]>('http://scorewinner.ch:8085/message/' + this.clientId).subscribe(messages => {
       this.messages = messages;
     });
   }

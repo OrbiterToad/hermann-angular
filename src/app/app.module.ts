@@ -9,6 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {NavigationComponent} from './navigation/navigation.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {CookieService} from 'ngx-cookie-service';
 
 const appRoutes: Routes = [
   {path: '', component: OverviewComponent},
@@ -30,7 +31,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

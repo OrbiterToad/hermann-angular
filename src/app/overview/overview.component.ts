@@ -11,7 +11,7 @@ export class OverviewComponent implements OnInit {
   clients: Client[];
 
   constructor(private httpService: HttpService) {
-    this.httpService.get<Client[]>('http://localhost:8085/client').subscribe(clients => {
+    this.httpService.get<Client[]>('http://scorewinner.ch:8085/client').subscribe(clients => {
       this.clients = clients;
     });
   }
