@@ -1,10 +1,10 @@
 <h1>Client {{client.name}}</h1>
-
 <div class="console card">
   <form (ngSubmit)="setCommand()" method="post">
     <input id="command" type="text" name="command" [(ngModel)]="command" autocomplete="off" required>
   </form>
   <br>
+  <pre *ngIf="loading" style="color: white;">Loading...</pre>
   <span *ngFor="let message of messages" [ngSwitch]="message.type">
     <pre *ngSwitchCase="'command'" style="color: dodgerblue;">{{message.message}}</pre>
     <pre *ngSwitchCase="'error'" style="color: orangered;">{{message.message}}</pre>

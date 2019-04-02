@@ -1,3 +1,4 @@
+<i *ngIf="loading" class="fas fa-circle-notch fa-spin"></i>
 <ul>
   <li *ngFor="let client of clients">
     <a routerLink="/client/{{client.id}}">

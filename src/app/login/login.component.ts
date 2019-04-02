@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Login} from '../model/formmodel/login';
-import {HttpService} from '../service/http.service';
-import {SessionId} from '../model/sessionId';
-import {CookieService} from 'ngx-cookie-service';
+import {AuthService} from '../service/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,21 +11,22 @@ import {CookieService} from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
   loginModel: Login;
 
-  constructor(private httpService: HttpService, private cookieService: CookieService) {
-    this.loginModel = new Login();
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
+    this.loginModel = new Login();
+
     this.loginModel.username = '';
     this.loginModel.password = '';
+
+    if (this.authService.user != null) {
+      this.router.navigate(['/']);
+    }
   }
 
-  login() {
-    this.httpService.post<SessionId>('http://scorewinner.ch:8081/api/2/login?name='
-      + this.loginModel.username + '&password=' + this.loginModel.password)
-      .subscribe(session => {
-        this.cookieService.set('hermann-session', session.sessionId);
-      });
-    window.location.href = '';
+  login(event) {
+    event.preventDefault();
+    this.authService.login(this.loginModel);
   }
 }

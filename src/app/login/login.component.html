@@ -1,5 +1,5 @@
 <h1>Login</h1>
-<form class="form" (ngSubmit)="login()" method="post">
+<form class="form" (ngSubmit)="login($event)" method="post">
   <fieldset>
     <label for="username">Username</label>
     <input class="form-control" id="username" type="text" name="username" [(ngModel)]="loginModel.username" required/>
@@ -13,4 +13,3 @@
   <br>
   <button type="submit" class="btn btn-primary">Login</button>
 </form>
-{{loginModel | json}}
