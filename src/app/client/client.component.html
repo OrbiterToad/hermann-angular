@@ -5,17 +5,20 @@
   </form>
   <br>
   <pre *ngIf="loading" style="color: white;">Loading...</pre>
-  <span *ngFor="let message of messages" [ngSwitch]="message.type">
-    <pre *ngSwitchCase="'command'" style="color: dodgerblue;">{{message.message}}</pre>
-    <pre *ngSwitchCase="'error'" style="color: orangered;">{{message.message}}</pre>
-    <pre *ngSwitchCase="'init'" style="color: yellow;">{{message.message}}</pre>
-    <pre *ngSwitchCase="'warning'" style="color: orange;">{{message.message}}</pre>
-    <pre *ngSwitchCase="'message'" style="color: violet;">{{message.message}}</pre>
-    <pre *ngSwitchCase="'response'" style="color: white;">{{message.message}}</pre>
-  </span>
+  <div style="overflow-y: scroll; height: 600px">
+    <div *ngFor="let message of messages" [ngSwitch]="message.type">
+      <pre *ngSwitchCase="'command'" style="color: dodgerblue; overflow: hidden">{{message.message}}</pre>
+      <pre *ngSwitchCase="'error'" style="color: orangered; overflow: hidden">{{message.message}}</pre>
+      <pre *ngSwitchCase="'init'" style="color: yellow; overflow: hidden">{{message.message}}</pre>
+      <pre *ngSwitchCase="'warning'" style="color: orange; overflow: hidden">{{message.message}}</pre>
+      <pre *ngSwitchCase="'message'" style="color: violet; overflow: hidden">{{message.message}}</pre>
+      <pre *ngSwitchCase="'response'" style="color: white; overflow: hidden">{{message.message}}</pre>
+    </div>
+  </div>
 </div>
 <br>
 <div class="card">
+  <div class="card-header">Client Info</div>
   <div class="card-body">
     <table class="table">
       <tr>
@@ -45,8 +48,24 @@
       </tr>
       <tr>
         <td>Last Seen</td>
-        <td>{{client.lastseen}}</td>
+        <td>{{client.lastseen | date:'dd.MM.yyyy HH:mm'}}</td>
       </tr>
     </table>
   </div>
 </div>
+<br>
+<div class="card" *ngIf="client.images.length != 0">
+  <div class="card-header">
+    Images
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div *ngFor="let image of client.images" class="col-12 col-sm-6 col-md-4" style="margin-bottom: 5px;">
+        <div class="card">
+          <img src="http://scorewinner.ch:8085/api/image/{{image.id}}" width="100%"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

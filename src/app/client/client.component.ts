@@ -3,6 +3,7 @@ import {Client} from '../model/client';
 import {HttpService} from '../service/http.service';
 import {ActivatedRoute} from '@angular/router';
 import {Message} from '../model/message';
+import {Image} from '../model/image';
 
 @Component({
   selector: 'app-client',
@@ -15,6 +16,7 @@ export class ClientComponent implements OnInit {
   command: string;
   private clientId: number;
   loading: boolean;
+  images: Image[];
 
   constructor(private route: ActivatedRoute, private httpService: HttpService) {
     this.loading = true;
@@ -24,9 +26,6 @@ export class ClientComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.clientId = +params['id'];
-    });
-    this.httpService.get<Client>('http://scorewinner.ch:8085/api/client/' + this.clientId).subscribe(client => {
-      this.client = client;
     });
     this.fetchMessages();
     setInterval(() => {
@@ -74,6 +73,10 @@ export class ClientComponent implements OnInit {
   private fetchMessages() {
     this.httpService.get<Message[]>('http://scorewinner.ch:8085/api/message/' + this.clientId).subscribe(messages => {
       this.messages = messages;
+      this.loading = false;
+    });
+    this.httpService.get<Client>('http://scorewinner.ch:8085/api/client/' + this.clientId).subscribe(client => {
+      this.client = client;
       this.loading = false;
     });
   }

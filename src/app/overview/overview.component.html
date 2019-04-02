@@ -1,8 +1,39 @@
 <i *ngIf="loading" class="fas fa-circle-notch fa-spin"></i>
-<ul>
-  <li *ngFor="let client of clients">
-    <a routerLink="/client/{{client.id}}">
-      {{client.nickname}}
-    </a>
-  </li>
-</ul>
+
+<div class="row">
+  <div *ngFor="let client of clients" class="col-12 col-sm-6 col-md-4">
+    <div class="card">
+      <div class="card-header">
+        {{client.nickname}}
+        <div *ngIf="isOnline(client.lastseen)" class="badge badge-pill badge-success">
+          Online
+        </div>
+        <div *ngIf="!isOnline(client.lastseen)" class="badge badge-pill badge-danger">
+          Offline
+        </div>
+      </div>
+      <div class="card-img-top" *ngIf="client.images.length > 0">
+        <img src="http://scorewinner.ch:8085/api/image/{{client.images[client.images.length - 1].id}}" width="100%">
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <tr>
+            <td>PC Name</td>
+            <td>{{client.name}}</td>
+          </tr>
+          <tr>
+            <td>Last seen</td>
+            <td>{{client.lastseen | date:'dd.MM.yyyy HH:mm'}}</td>
+          </tr>
+          <tr>
+            <td>OS</td>
+            <td>{{client.os}}</td>
+          </tr>
+        </table>
+        <a class="btn btn-primary" routerLink="/client/{{client.id}}">
+          View
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

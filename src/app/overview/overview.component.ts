@@ -22,4 +22,8 @@ export class OverviewComponent implements OnInit {
   ngOnInit() {
   }
 
+  isOnline(lastSeen): boolean {
+    // Check if is away longer than 4 minutes
+    return (new Date().getTime() - new Date(lastSeen).getTime()) < 180000;
+  }
 }

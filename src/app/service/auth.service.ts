@@ -25,6 +25,7 @@ export class AuthService {
     this.httpService.get<User>('http://scorewinner.ch:8081/api/2/user?sessionId=' + sessionId)
       .subscribe(user => {
         this._user = user;
+        console.log(user);
       });
     return this._user;
   }
