@@ -13,7 +13,7 @@ export class OverviewComponent implements OnInit {
 
   constructor(private httpService: HttpService) {
     this.loading = true;
-    this.httpService.get<Client[]>('/api/client').subscribe(clients => {
+    this.httpService.get<Client[]>('http://scorewinner.ch:8085/api/client').subscribe(clients => {
       this.clients = clients;
       this.loading = false;
     });

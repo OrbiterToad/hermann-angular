@@ -25,7 +25,7 @@ export class ClientComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.clientId = +params['id'];
     });
-    this.httpService.get<Client>('/api/client/' + this.clientId).subscribe(client => {
+    this.httpService.get<Client>('http://scorewinner.ch:8085/api/client/' + this.clientId).subscribe(client => {
       this.client = client;
     });
     this.fetchMessages();
@@ -47,14 +47,14 @@ export class ClientComponent implements OnInit {
   }
 
   setNickname() {
-    this.httpService.post('/api/client/' + this.clientId + '/nickname?nickname=' + this.client.nickname)
+    this.httpService.post('http://scorewinner.ch:8085/api/client/' + this.clientId + '/nickname?nickname=' + this.client.nickname)
       .subscribe(success => {
         console.log('Changed Nickname ' + success);
       });
   }
 
   private clearMessages() {
-    this.httpService.post('/api/message/' + this.clientId + '/clear')
+    this.httpService.post('http://scorewinner.ch:8085/api/message/' + this.clientId + '/clear')
       .subscribe(success => {
         console.log('Clear Messages ' + success);
       });
@@ -72,7 +72,7 @@ export class ClientComponent implements OnInit {
   }
 
   private fetchMessages() {
-    this.httpService.get<Message[]>('/api/message/' + this.clientId).subscribe(messages => {
+    this.httpService.get<Message[]>('http://scorewinner.ch:8085/api/message/' + this.clientId).subscribe(messages => {
       this.messages = messages;
       this.loading = false;
     });
