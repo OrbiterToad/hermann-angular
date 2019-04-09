@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
+<img src="https://i.imgur.com/iSsbuzN.png" style="border-radius:1rem;box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);">
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://scorewinner.ch:4200/`. The app will automatically reload if you change any of the source files.
