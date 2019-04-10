@@ -1,7 +1,8 @@
 # HermannAngular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
-
+<br>
+## Test VM Client in action
 <img src="https://i.imgur.com/iSsbuzN.png" style="border-radius:1rem;box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);">
 
 ## Development server
